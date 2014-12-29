@@ -44,7 +44,7 @@ gem 'haml-rails'
 gem 'high_voltage'
 gem 'omniauth'
 gem 'omniauth-twitter'
-gem 'pg'
+gem "mongoid", "~> 4.0.0"
 gem 'simple_form'
 gem 'unicorn'
 gem 'unicorn-rails'
