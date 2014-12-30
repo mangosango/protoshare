@@ -49,6 +49,11 @@ gem 'simple_form'
 gem 'unicorn'
 gem 'unicorn-rails'
 
+# File uploads
+gem 'carrierwave'
+gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+gem 'fog'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_20]
