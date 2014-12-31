@@ -1,0 +1,14 @@
+%nav#topbar
+  %ul.inline-list
+    %li#home-link
+      = link_to 'Easel', root_path
+    - if user_signed_in?
+      %li#profile-menu
+        = link_to "users/#{current_user.id}/edit", :id => "menu-link" do
+          #{current_user.email}
+          / %i.icon-chevron-down
+    - else
+      %li#profile-menu
+        = link_to "users/sign_in" do
+          Sign In
+  / = render 'layouts/menu'

@@ -1,0 +1,10 @@
+- if user_signed_in?
+  #dropdown
+    %ul.dropdown-nav
+      %li
+        = link_to "users/#{current_user.id}/edit" do
+          Account Settings
+          / #{current_user.db_name}
+      %li
+        = link_to '/dropbox/logout', :method => :delete do
+          Sign Out
