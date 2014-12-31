@@ -1,0 +1,8 @@
+- if user_signed_in?
+  %li#profile-menu
+    = link_to "/users/sign_out", :id => "menu-link" do
+      #{current_user.email}
+- else
+  %li#profile-menu
+    = link_to "/users/sign_in" do
+      Sign In

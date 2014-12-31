@@ -1,0 +1,13 @@
+= simple_form_for(@prototype) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :folder, as: 'file'
+    / = f.input :code_url
+    / = f.input :preview_url
+    / = f.input :short_url
+    = f.input :device
+    = f.input :description
+
+  .form-actions
+    = f.button :submit

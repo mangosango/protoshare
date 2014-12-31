@@ -9,7 +9,24 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
-gem 'foundation-rails'
+gem 'foundation-rails', '5.4.3.1'
+gem 'devise'
+gem "mongoid", "~> 4.0.0"
+# gem 'sqlite3'
+
+# Social
+gem 'mongo_followable'
+gem 'mongoid-likeable'
+gem 'public_activity'
+gem 'mongoid_commentable', :git => "git://github.com/madha14/mongoid_commentable.git"
+gem 'mongoid_taggable'
+
+# File uploads
+gem 'carrierwave'
+gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+gem 'carrierwave_direct'
+gem 'fog'
+
 gem 'haml-rails'
 gem 'high_voltage'
 gem 'simple_form'
@@ -22,10 +39,6 @@ group :development do
   gem 'quiet_assets'
   gem 'rails_layout'
 end
-group :development, :test do
-  gem 'sqlite3'
-end
 group :production do
-  gem 'pg'
   gem 'rails_12factor'
 end
