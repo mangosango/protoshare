@@ -38,20 +38,32 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-
-gem 'foundation-rails'
+# Frontend
+gem 'foundation-rails', '5.4.3.1'
 gem 'haml-rails'
 gem 'high_voltage'
-gem 'omniauth'
-gem 'omniauth-twitter'
+
+# Authentication
+gem 'devise', '3.4'
+gem 'bson_ext'
+# gem 'omniauth'
+# gem 'omniauth-twitter'
 gem "mongoid", "~> 4.0.0"
 gem 'simple_form'
 gem 'unicorn'
 gem 'unicorn-rails'
 
+# Social
+gem 'mongo_followable'
+gem 'mongoid-likeable'
+gem 'public_activity'
+gem 'mongoid_commentable', :git => "git://github.com/madha14/mongoid_commentable.git"
+gem 'mongoid_taggable'
+
 # File uploads
 gem 'carrierwave'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+gem 'carrierwave_direct'
 gem 'fog'
 
 group :development do
