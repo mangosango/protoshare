@@ -5,6 +5,13 @@ class Prototype
   include Mongoid::Commentable
   include Mongoid::Taggable
 
+  # File Uploader
+  # embeds_many :files, as: :fileable
+  # accepts_nested_attributes_for :files, :allow_destroy => true
+
+  # Title
+  field :title,    	   type: String, default: ""
+
   # URLs
   field :index_url,    type: String, default: ""
   field :code_url,     type: String, default: ""
@@ -15,7 +22,13 @@ class Prototype
   field :device,       type: String, default: ""
   field :description,  type: String, default: ""
 
-  # File Uploader
-  mount_uploader :folder, PrototypeFileUploader
+  # field :attachments,  :type => Hash
 
+  # Upload
+  # mount_uploaders :attachments, PrototypeFileUploader
+  belongs_to :user
+  has_many :attachments, dependent: :delete
+  accepts_nested_attributes_for :attachments
+
+  validates_presence_of :title
 end

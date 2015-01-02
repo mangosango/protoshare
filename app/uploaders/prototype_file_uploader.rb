@@ -7,23 +7,22 @@ class PrototypeFileUploader < CarrierWave::Uploader::Base
   # include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  # storage :file
+  storage :file
   # storage :fog
-  include CarrierWaveDirect::Uploader
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
-  # def store_dir
-  #   "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-  # end
+  def store_dir
+    "uploads/#{model.prototype_id}/#{model.path}"
+  end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
-  # def default_url
-  #   # For Rails 3.1+ asset pipeline compatibility:
-  #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
-  #
-  #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
-  # end
+  def default_url
+    # For Rails 3.1+ asset pipeline compatibility:
+    # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
+  
+    "/public/favicon.ico"
+  end
 
   # Process files as they are uploaded:
   # process :scale => [200, 300]
@@ -40,7 +39,7 @@ class PrototypeFileUploader < CarrierWave::Uploader::Base
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   # def extension_white_list
-  #   %w(jpg jpeg gif png)
+  #   %w(jpg jpeg gif png webm mp4 mov mpg mpeg mp3 html coffee js json map css sketch)
   # end
 
   # Override the filename of the uploaded files:

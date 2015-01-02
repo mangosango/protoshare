@@ -1,8 +1,8 @@
 - if user_signed_in?
   %li#profile-menu
-    = link_to "/users/sign_out", :id => "menu-link" do
+    = link_to destroy_user_session_path, :method => :delete, :id => "menu-link" do
       #{current_user.email}
 - else
   %li#profile-menu
-    = link_to "/users/sign_in" do
+    = link_to new_user_session_path do
       Sign In

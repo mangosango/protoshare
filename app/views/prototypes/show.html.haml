@@ -1,11 +1,40 @@
 %p#notice= notice
 
+%h2
+  = @prototype.title
+%h4
+  = @owner.email
 %p
+  %b Device:
   = @prototype.device
 %p
+  %b Description:
   = @prototype.description
 %p
-  = @prototype.folder
+  %b
+    = @prototype.likes
+    Likes (
+    - if @prototype.liked? current_user 
+      = link_to "/prototype/#{@prototype.id}/unlike" do
+        Liked
+    - else
+      = link_to "/prototype/#{@prototype.id}/like" do
+        Like?
+    )
+%dl.accordion{:data => { :accordion => true } }
+  %dd.accordion-navigation
+    = link_to "#panel1a" do
+      Files
+    #panel1a.content
+      %ul
+        = @prototype.attachments.each do |a|
+          %li
+            = link_to "#{a.file.current_path}", a.file.url
+  %dd.accordion-navigation
+    = link_to "#panel2a" do
+      Iframe Preview
+    #panel2a.content.active
+      %iframe{:frameborder => "0", :src => "#{@index.file.url}"} You need a Frames Capable browser to view this content.
 
 = link_to 'Edit', edit_prototype_path(@prototype)
 \|

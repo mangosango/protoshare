@@ -3,17 +3,20 @@
 %table
   %thead
     %tr
-      %th
+      %th Title
+      %th Creator
       %th
       %th
       
   %tbody
     - @prototypes.each do |prototype|
       %tr
-        %td= link_to 'Show', prototype
+        %td= link_to prototype.title, prototype
+        %td= link_to @users.find(prototype.user_id).email, @users.find(prototype.user_id)
         %td= link_to 'Edit', edit_prototype_path(prototype)
         %td= link_to 'Destroy', prototype, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Prototype', new_prototype_path
+    %tr
+      %td= link_to 'New Prototype', new_prototype_path
+      %td
+      %td
+      %td

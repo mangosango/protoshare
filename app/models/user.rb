@@ -34,6 +34,13 @@ class User
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
 
+  field :username,          type: String
+
+  has_many :prototypes, dependent: :delete
+  accepts_nested_attributes_for :prototypes
+
+  validates_presence_of :username
+
   class << self
     def serialize_from_session(key, salt)
       record = to_adapter.get(key[0]['$oid'])

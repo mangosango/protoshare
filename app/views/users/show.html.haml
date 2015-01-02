@@ -1,0 +1,6 @@
+%h1 
+  = @user.username
+%ul
+  = @user.prototypes.each do |prototype|
+    %li
+      = link_to prototype.title, prototype

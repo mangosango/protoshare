@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+iframe {
+	width: 100%;
+	min-height: 100vh;
+	height: 100%;
+}
