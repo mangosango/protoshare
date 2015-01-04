@@ -5,10 +5,13 @@ class PrototypeFileUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
-  # include CarrierWaveDirect::Uploader
 
   # # Choose what kind of storage to use for this uploader:
-  storage :file
+  if Rails.env.production
+    include CarrierWaveDirect::Uploader
+  else
+    storage :file
+  end
   # storage :fog
 
   # Override the directory where uploaded files will be stored.
