@@ -40,12 +40,13 @@
         - @comments.each do |comment|
           %p
             %b="#{comment.authorname} says"
-            - if comment.author == current_user.id.to_s
-              %small
-                (
-                = link_to "/comments/#{comment.id}", :method => :delete do
-                  delete
-                )
+            - if user_signed_in?
+              - if comment.author == current_user.id.to_s
+                %small
+                  (
+                  = link_to "/comments/#{comment.id}", :method => :delete do
+                    delete
+                  )
             %br
             = "#{comment.body}"
       - else
