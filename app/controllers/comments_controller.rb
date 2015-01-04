@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  # before_action :authenticate_user!, only: [:new, :edit, :update, :create, :destroy]
+  before_action :authenticate_user!, only: [:new, :edit, :update, :create, :destroy]
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
   respond_to :html
@@ -29,9 +29,9 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment.destroy
-    activity = PublicActivity::Activity.where(key: 'prototype.comment_added', trackable_id: @comment.prototype_id, owner_id: current_user.id)
+    activity = PublicActivity::Activity.where(key: 'prototype.comment_added', trackable_id: @comment.commentable_id, owner_id: current_user.id)
     activity.destroy
+    @comment.destroy
     redirect_to(:back)
   end
 
