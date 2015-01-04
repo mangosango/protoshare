@@ -37,6 +37,14 @@ $(function() {
     });
   }
 
+  var $reload_button = $('#reload_iframe');
+  if ($reload_button) {
+    $reload_button.on('click', function(e) {
+      e.preventDefault();
+      document.getElementById('framer-window').src += '';
+    });
+  }
+
   // $('input[name="commit"]').on('click', function(e) {
   //   e.preventDefault();
   //   $.post( "/prototypes", {

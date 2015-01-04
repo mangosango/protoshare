@@ -72,8 +72,12 @@
     /       Image Preview
     .panel
       = link_to "Fullscreen", @index.file.url, :target => '_blank'
+      |
+      = link_to "View Code", @code.file.url, :target => '_blank'
+      |
+      = link_to "Reload", "reload", :id => 'reload_iframe'
       .tabs-content
         #panel2.content.active
-          %iframe{:frameborder => "0", :src => "#{@index.file.url}"} You need a Frames Capable browser to view this content.
+          %iframe{:frameborder => "0", :src => "#{@index.file.url}", :id => "framer-window"} You need a Frames Capable browser to view this content.
         / #panel1.content
         /   %img{:src => "#{@prototype.preview.image.url}"}
