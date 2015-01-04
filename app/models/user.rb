@@ -1,9 +1,13 @@
 class User
   include Mongoid::Document
+  include Mongo::Followable::Followed
+  include Mongo::Followable::Follower
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, 
+         :authentication_keys => [:login]
 
   ## Database authenticatable
   field :email,              type: String, default: ""
@@ -35,11 +39,14 @@ class User
   # field :locked_at,       type: Time
 
   field :username,          type: String
+  attr_accessor :login
 
   has_many :prototypes, dependent: :delete
+  has_many :attachments
+  has_many :previews
   accepts_nested_attributes_for :prototypes
 
-  validates_presence_of :username
+  validates :username, uniqueness: { case_sensitive: true }, presence: true
 
   class << self
     def serialize_from_session(key, salt)
@@ -47,4 +54,15 @@ class User
       record if record && record.authenticatable_salt == salt
     end
   end
+
+  # function to handle user's login via email or username
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    if login = conditions.delete(:login).downcase
+      where(conditions).where('$or' => [ {:username => /^#{Regexp.escape(login)}$/i}, {:email => /^#{Regexp.escape(login)}$/i} ]).first
+    else
+      where(conditions).first
+    end
+  end
+  
 end

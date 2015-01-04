@@ -15,20 +15,23 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 gem 'foundation-rails', '5.4.3.1'
 gem 'devise'
-gem "mongoid", "~> 4.0.0"
+gem 'cancan'
+gem 'mongoid', '~> 4.0.0'
 # gem 'sqlite3'
 
 # Social
 gem 'mongo_followable'
 gem 'mongoid-likeable'
 gem 'public_activity'
-gem 'mongoid_commentable', :git => "git://github.com/madha14/mongoid_commentable.git"
+# gem 'mongoid_commentable', :git => 'git://github.com/madha14/mongoid_commentable.git'
 gem 'mongoid_taggable'
+gem 'mongoid_token', :git => 'git://github.com/thetron/mongoid_token.git'
 
 # File uploads
-gem 'carrierwave', :git => "git://github.com/carrierwaveuploader/carrierwave.git"
-gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid', :git => "git://github.com/carrierwaveuploader/carrierwave-mongoid.git"
+gem 'carrierwave', :git => 'git://github.com/carrierwaveuploader/carrierwave.git'
+gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid', :git => 'git://github.com/carrierwaveuploader/carrierwave-mongoid.git'
 gem 'carrierwave_direct'
+gem 'mini_magick'
 gem 'fog'
 
 gem 'haml-rails'

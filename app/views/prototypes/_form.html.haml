@@ -14,14 +14,24 @@
 /   .form-actions
 /     = f.button :submit
 
-= form_for @prototype, :html => {:multipart => true} do |f|
-  = f.label :title
-  = f.text_field :title
-  = f.label :device
-  = f.text_field :device
-  = f.label :description
-  = f.text_field :description
-  = file_field_tag "attachments[]", type: :file, multiple: true, webkitdirectory: true, directory: true
-  = hidden_field_tag "filename[]"
-  = f.submit
-
+= simple_form_for @prototype, :html => {:multipart => true} do |f|
+  .large-6.columns
+    .form-inputs
+      = f.input :title
+      = f.input :device
+      = f.input :description, as: :text
+      = f.input :tags
+  .large-6.columns
+    .form-inputs
+      / = f.label :preview
+      = f.input :preview, as: :file
+      = f.label :attachments
+      = file_field_tag "attachments[]", type: :file, multiple: true, webkitdirectory: true, directory: true
+      = hidden_field_tag "filename[]"
+  .large-12.columns
+    .form-actions
+      .panel
+        .text-right
+          = link_to 'Cancel', :back
+          |
+          = f.button :submit

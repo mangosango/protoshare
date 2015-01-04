@@ -2,8 +2,9 @@ class Prototype
   include Mongoid::Document
   include Mongoid::Timestamps::Short
   include Mongoid::Likeable
-  include Mongoid::Commentable
   include Mongoid::Taggable
+  include Mongoid::Token
+  include PublicActivity::Common
 
   # File Uploader
   # embeds_many :files, as: :fileable
@@ -11,6 +12,7 @@ class Prototype
 
   # Title
   field :title,    	   type: String, default: ""
+  validates_presence_of :title
 
   # URLs
   field :index_url,    type: String, default: ""
@@ -25,10 +27,19 @@ class Prototype
   # field :attachments,  :type => Hash
 
   # Upload
-  # mount_uploaders :attachments, PrototypeFileUploader
+  has_one :preview, dependent: :destroy
+  accepts_nested_attributes_for :preview
+
   belongs_to :user
-  has_many :attachments, dependent: :delete
+  has_many :attachments, dependent: :destroy
   accepts_nested_attributes_for :attachments
 
-  validates_presence_of :title
+  # Comments
+  has_many :comments, as: :commentable, dependent: :destroy  
+
+  # Validations
+  validates_presence_of :preview
+  validates_presence_of :attachments
+
+  token
 end

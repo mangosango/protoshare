@@ -1,6 +1,9 @@
 class Comment
   include Mongoid::Document
-  include Mongoid_Commentable::Comment
-  field :text, :type => String
-  field :author, :type => String
+  include Mongoid::Timestamps::Short
+
+  belongs_to :commentable, polymorphic: true
+  field :author,	type: String, default: ""
+  field :authorname,type: String, default: ""
+  field :body,      type: String, default: ""
 end

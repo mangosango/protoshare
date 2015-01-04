@@ -1,8 +1,24 @@
-- if user_signed_in?
-  %li#profile-menu
-    = link_to destroy_user_session_path, :method => :delete, :id => "menu-link" do
-      #{current_user.email}
-- else
-  %li#profile-menu
-    = link_to new_user_session_path do
-      Sign In
+%li#user-notifications.has-dropdown
+  - if user_signed_in?
+    = link_to "Notifications", "#"
+    %ul.dropdown
+      %li
+        %iframe{:src => "/notifications", :id => "notifications", :frameborder => 'none'}
+%li#user-profile.has-dropdown
+  - if user_signed_in?
+    = link_to current_user.username, "#"
+    %ul.dropdown
+      %li
+        = link_to "My Profile", current_user
+      %li
+        = link_to "Account Settings", edit_user_registration_path
+      %li
+        %li#profile-menu
+          = link_to destroy_user_session_path, :method => :delete, :id => "menu-link" do
+            Sign Out
+  - else
+    %li#profile-menu
+      = link_to new_user_session_path do
+        Sign In
+%li#user-profile
+  = link_to 'Submit', new_prototype_path, :class => 'button'

@@ -1,41 +1,77 @@
 %p#notice= notice
 
-%h2
-  = @prototype.title
-%h4
-  = @owner.email
-%p
-  %b Device:
-  = @prototype.device
-%p
-  %b Description:
-  = @prototype.description
-%p
-  %b
-    = @prototype.likes
-    Likes (
-    - if @prototype.liked? current_user 
-      = link_to "/prototype/#{@prototype.id}/unlike" do
-        Liked
-    - else
-      = link_to "/prototype/#{@prototype.id}/like" do
-        Like?
-    )
-%dl.accordion{:data => { :accordion => true } }
-  %dd.accordion-navigation
-    = link_to "#panel1a" do
-      Files
-    #panel1a.content
-      %ul
-        = @prototype.attachments.each do |a|
-          %li
-            = link_to "#{a.file.current_path}", a.file.url
-  %dd.accordion-navigation
-    = link_to "#panel2a" do
-      Iframe Preview
-    #panel2a.content.active
-      %iframe{:frameborder => "0", :src => "#{@index.file.url}"} You need a Frames Capable browser to view this content.
-
-= link_to 'Edit', edit_prototype_path(@prototype)
-\|
-= link_to 'Back', prototypes_path
+.row
+  .large-4.columns
+    %h2
+      = @prototype.title
+    %p
+      by
+      = link_to @owner do
+        = @owner.username
+    %h5 Description
+    .panel
+      / %b Device:
+      / = @prototype.device
+      %p
+        = @prototype.description
+    %h5 Likes
+    .panel
+      %b= "#{@prototype.likes} Likes"
+      %span.label.secondary
+        - if @prototype.liked? current_user
+          = link_to "/prototype/#{@prototype.id}/unlike", :id => "liked" do
+            = " "
+        - else
+          = link_to "/prototype/#{@prototype.id}/like", :id => "like" do
+            Like?
+    %h5 Tags
+    .panel
+      %p
+        - @prototype.tags_array.each do |tag|
+          %span.label.info
+            = tag
+        - if @prototype.user_id == current_user.id
+          %span.label.secondary
+            = link_to 'Add Tags', edit_prototype_path(@prototype)
+    %h5 Feedback
+    .panel
+      - if @comments.exists?
+        - @comments.each do |comment|
+          %p
+            %b="#{comment.authorname} says"
+            - if comment.author == current_user.id.to_s
+              %small
+                (
+                = link_to "/comments/#{comment.id}", :method => :delete do
+                  delete
+                )
+            %br
+            = "#{comment.body}"
+      - else
+        %p No Comments. Be the first to add one!
+      %hr
+      #add_comment
+        - @new_comment = @prototype.comments.build()
+        = simple_form_for(@new_comment, :url => comments_path(@new_comment, :prototype_id => @prototype.id.to_s) ) do |f|
+          .form-inputs
+            = f.input :body, as: :text, label: false, placeholder: 'Leave some feedback'
+          .form-actions
+            = f.button :submit
+    %p
+      = edit_link @prototype
+      %br
+      = destroy_link @prototype
+  .large-8.columns
+    / %dl.tabs{:data => { :tab => true } }
+    /   %dd.active
+    /     = link_to "#panel2" do
+    /       Iframe Preview
+    /   %dd
+    /     = link_to "#panel1" do
+    /       Image Preview
+    .panel
+      .tabs-content
+        #panel2.content.active
+          %iframe{:frameborder => "0", :src => "#{@index.file.url}"} You need a Frames Capable browser to view this content.
+        / #panel1.content
+        /   %img{:src => "#{@prototype.preview.image.url}"}

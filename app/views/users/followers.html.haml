@@ -1,0 +1,9 @@
+.row
+  .large-12.columns
+    %h2 
+      = "#{@user.username}'s Followers"
+    %hr
+    %ul
+      - @followers.each do |follower|
+        %li
+          = link_to follower.username, follower

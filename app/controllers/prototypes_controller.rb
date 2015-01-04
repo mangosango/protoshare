@@ -14,8 +14,10 @@ class PrototypesController < ApplicationController
     # @attachments = PrototypeFileUploader.where(model: @prototype)
     @index = @prototype.attachments.find_by(file: 'index.html')
     @code = @prototype.attachments.find_by(file: 'app.coffee')
+    @comments = @prototype.comments
+    # @new_comment = @prototype.comments.build()
     @owner = User.find(@prototype.user_id)
-    respond_with(@prototype, @index, @owner)
+    respond_with(@prototype, @index, @owner, @comments)
   end
 
   def new
@@ -31,37 +33,59 @@ class PrototypesController < ApplicationController
     device = params['prototype']['device']
     description = params['prototype']['description']
     title = params['prototype']['title']
+    preview = params['prototype']['preview']
+    tags = params['prototype']['tags']
     files = params[:attachments]
     paths = params[:filename][0].split(/,/)
-    
-    @prototype = current_user.prototypes.build(title: title, device: device, description: description)
-    
+    @prototype = current_user.prototypes.build(title: title, device: device, description: description, tags: tags)
+    @prototype.preview = Preview.new(image: preview, user_id: current_user.id)
     files.each_with_index do |f, i|
-      @prototype.attachments.push(Attachment.new(file: f, path: paths[i]))
+      @prototype.attachments.push(Attachment.new(file: f, original_filename: f.original_filename, path: paths[i], user_id: current_user.id))
     end
-
     @prototype.save!
     respond_with(@prototype)
   end
 
   def like
     @prototype.like current_user
-    redirect_to @prototype
+    @prototype.create_activity key: 'prototype.liked_by', owner_id: current_user.id, owner: current_user
+    redirect_to :back
   end
 
   def unlike
     @prototype.unlike current_user
-    redirect_to @prototype
+    activity = PublicActivity::Activity.where(key: 'prototype.liked_by', trackable_id: @prototype.id, owner_id: current_user.id)
+    activity.destroy
+    redirect_to :back
   end
 
   def update
-    @prototype.update(prototype_params)
+    device = params['prototype']['device']
+    description = params['prototype']['description']
+    title = params['prototype']['title']
+    preview = params['prototype']['preview']
+    tags = params['prototype']['tags']
+    files = params[:attachments]
+    paths = params[:filename][0].split(/,/)
+    if preview
+      @prototype.preview.destroy
+      @prototype.preview = Preview.new(image: preview)
+    end
+    if files
+      @prototype.attachments.destroy_all
+      files.each_with_index do |f, i|
+        @prototype.attachments.push(Attachment.new(file: f, original_filename: f.original_filename, path: paths[i]))
+      end
+    end
+    @prototype.update!(title: title, device: device, description: description, tags: tags)
     respond_with(@prototype)
   end
 
   def destroy
     @prototype.destroy
-    respond_with(@prototype)
+    @activity = PublicActivity::Activity.where(trackable_id: @prototype.id)
+    @activity.destroy
+    redirect_to '/'
   end
 
   private

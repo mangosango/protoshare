@@ -18,6 +18,9 @@
 //= require jquery_nested_form
 //= require_tree .
 
+Turbolinks.enableTransitionCache();
+Turbolinks.enableProgressBar();
+
 $(function() {
   var names = [];
   if ( $('#attachments_') ) {
@@ -44,3 +47,4 @@ $(function() {
 
   $(document).foundation();
 });
+$(function(){ $(document).foundation(); });

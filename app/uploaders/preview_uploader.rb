@@ -1,35 +1,36 @@
 # encoding: utf-8
 
-class PrototypeFileUploader < CarrierWave::Uploader::Base
+class PreviewUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
   # include CarrierWaveDirect::Uploader
 
-  # # Choose what kind of storage to use for this uploader:
+  # Choose what kind of storage to use for this uploader:
   storage :file
   # storage :fog
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "uploads/prototypes/#{model.prototype_id}/#{model.path}"
+    "uploads/prototypes/#{model.prototype_id}/preview_img"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
-  def default_url
-    # For Rails 3.1+ asset pipeline compatibility:
-    # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
-  
-    "/public/favicon.ico"
-  end
+  # def default_url
+  #   # For Rails 3.1+ asset pipeline compatibility:
+  #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
+  #
+  #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
+  # end
 
   # Process files as they are uploaded:
+  # process :resize_to_fit => [440, 440]
   # process :scale => [200, 300]
-  #
+  
   # def scale(width, height)
-  #   # do something
+    
   # end
 
   # Create different versions of your uploaded files:
@@ -40,13 +41,13 @@ class PrototypeFileUploader < CarrierWave::Uploader::Base
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   # def extension_white_list
-  #   %w(jpg jpeg gif png webm mp4 mov mpg mpeg mp3 html coffee js json map css sketch)
+  #   %w(jpg jpeg gif png)
   # end
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   def filename
-    "#{model.original_filename}"
+    "preview.#{file.extension}" if original_filename
   end
 
 end
