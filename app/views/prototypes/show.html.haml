@@ -30,9 +30,10 @@
         - @prototype.tags_array.each do |tag|
           %span.label.info
             = tag
-        - if @prototype.user_id == current_user.id
-          %span.label.secondary
-            = link_to 'Add Tags', edit_prototype_path(@prototype)
+        - if user_signed_in?
+          - if @prototype.user_id == current_user.id
+            %span.label.secondary
+              = link_to 'Add Tags', edit_prototype_path(@prototype)
     %h5 Feedback
     .panel
       - if @comments.exists?
@@ -70,6 +71,7 @@
     /     = link_to "#panel1" do
     /       Image Preview
     .panel
+      = link_to "Fullscreen", @index.file.url, :target => '_blank'
       .tabs-content
         #panel2.content.active
           %iframe{:frameborder => "0", :src => "#{@index.file.url}"} You need a Frames Capable browser to view this content.
