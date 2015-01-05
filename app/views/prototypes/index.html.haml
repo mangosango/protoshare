@@ -1,7 +1,7 @@
 .row
   .large-12.columns
     %h2 All
-    %ul.large-block-grid-4.medium-block-grid-3.small-block-grid-2
+    %ul.large-block-grid-4.medium-block-grid-3.small-block-grid-2#prototypes-grid
       - @prototypes.each do |prototype|
         %li
           = link_to prototype, :class => 'preview-img', :style => "background-image: url('#{prototype.preview.image.url}')" do
@@ -24,36 +24,3 @@
               |
               = link_to prototype do
                 = "#{prototype.comments.length} Comment"
-    / %h1 Listing prototypes
-
-    / %table
-    /   %thead
-    /     %tr
-    /       %th
-    /       %th Title
-    /       %th Designer
-    /       %th Likes
-    /       %th Comments
-    /       %th
-          
-    /   %tbody
-    /     - @prototypes.each do |prototype|
-    /       %tr
-    /         %td
-    /           = link_to prototype do
-    /             %img{:src => "#{prototype.preview.image.url}"}
-    /         %td= link_to prototype.title, prototype
-    /         %td= link_to @users.find(prototype.user_id).username, @users.find(prototype.user_id)
-    /         %td= prototype.likes
-    /         %td= prototype.comments.length
-    /         %td
-    /           = link_to 'Edit', edit_prototype_path(prototype)
-    /           |
-    /           = link_to 'Destroy', prototype, :method => :delete, :data => { :confirm => 'Are you sure?' }
-    /     %tr
-    /       %td= link_to 'New Prototype', new_prototype_path
-    /       %td
-    /       %td
-    /       %td
-    /       %td
-    /       %td

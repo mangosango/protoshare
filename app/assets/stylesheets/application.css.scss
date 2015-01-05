@@ -12,9 +12,35 @@
  *
  *= require_tree .
  *= require_self
- //= require foundation_and_overrides
-
+ *= require entypo
+ *= require foundation_and_overrides
  */
+
+@charset "UTF-8";
+ 
+// Prototype grid styles
+#prototypes-grid li .panel {
+	background: white;
+	border-top: none;
+	border-right: 1px solid rgba(0,0,0,0.1);
+	border-left: 1px solid rgba(0,0,0,0.1);
+	border-bottom: 1px solid rgba(0,0,0,0.1);
+	-webkit-border-bottom-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+#prototypes-grid li .preview-img {
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-topleft: 5px;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+}
 
 iframe {
 	width: 100%;
