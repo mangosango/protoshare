@@ -38,4 +38,6 @@ CarrierWave.configure do |config|
       :aws_secret_access_key  => "KQ9jbrX+XnneI2b7G9gYhsoz1As5mYfXFqbpI+0u"
   }
   config.fog_directory  = "storage-protoshare"
+  config.fog_public = true
+  config.fog_use_ssl_for_aws = false
 end
