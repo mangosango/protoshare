@@ -1,26 +1,33 @@
 .row
   .large-12.columns
-    %h2 All
-    %ul.large-block-grid-4.medium-block-grid-3.small-block-grid-2#prototypes-grid
-      - @prototypes.each do |prototype|
-        %li
-          = link_to prototype, :class => 'preview-img', :style => "background-image: url('#{prototype.preview.image.url}')" do
-            %span.inner 
-            / %img{:src => "#{prototype.preview.image.url}"}
-          .panel
-            %h5
-              = link_to prototype.title, prototype
-            %p
-              by
-              = link_to @users.find(prototype.user_id).username, @users.find(prototype.user_id)
-            %span
-              = prototype.likes
-              - if prototype.liked? current_user 
-                = link_to "/prototype/#{prototype.id}/unlike" do
-                  Liked
-              - else
-                = link_to "/prototype/#{prototype.id}/like" do
-                  Like?
-              |
-              = link_to prototype do
-                = "#{prototype.comments.length} Comment"
+    #page-wrapper
+      %ul.large-block-grid-4.medium-block-grid-3.small-block-grid-2#prototypes-grid
+        - @prototypes.each do |prototype|
+          %li
+            = link_to prototype, :class => 'preview-img', :style => "background-image: url('#{prototype.preview.image.url}')" do
+              %span.inner 
+              / %img{:src => "#{prototype.preview.image.url}"}
+            .panel.text-center
+              %p
+                = link_to prototype.title, prototype, :class => "title"
+                %br
+                = link_to @users.find(prototype.user_id).username, @users.find(prototype.user_id), :class => "author"
+              %hr
+              %span.likes
+                - if prototype.liked? current_user 
+                  = link_to "/prototype/#{prototype.id}/unlike" do
+                    %i.icon-heart.some
+                    = prototype.likes
+                - else
+                  = link_to "/prototype/#{prototype.id}/like" do
+                    %i.icon-heart
+                    = prototype.likes
+              %span.comments
+                - if prototype.comments.length <= 0
+                  = link_to prototype do
+                    %i.icon-comment
+                    = "#{prototype.comments.length}"
+                - else
+                  = link_to prototype do
+                    %i.icon-comment.some
+                    = "#{prototype.comments.length}"
