@@ -1,36 +1,51 @@
 #prototype-page-wrapper
   .full-width
+    .floating-icon#back.text-center
+      = link_to '/' do
+        %i.icon-home
+    .floating-icon#refresh.text-center
+      = link_to "reload", :id => 'reload_iframe' do
+        %i.icon-cycle
+    .floating-icon#fullscreen.text-center
+      = link_to @index.file.url, :target => '_blank' do
+        %i.icon-resize-full
     #framer-window
       %iframe{:frameborder => "0", :src => "#{@index.file.url}", :id => "framer-frame"} You need a Frames Capable browser to view this content.
     #meta
-      %span.title-text
-        = @prototype.title
-      %span.by-text
-        by
+      #author-avatar
         = link_to @owner do
-          = "#{@owner.username}"
+          %img{src: image_url("gabe.png"), class: 'round'}
+      #author-info
+        %span.title-text
+          = @prototype.title
+        %span.by-text
+          by
+          = link_to @owner do
+            = "#{@owner.username}"
       %hr
       #description
         .content
           - if @prototype.description.empty?
             .text-center
-              %em.fade No Description (.﹒︠₋﹒︡.)
+              %small.fade No description... (◕︿◕✿)
           - else
             = markdown @prototype.description
         .overlay
-      %ul.no-bullet
+      %ul.no-bullet#toolbox
         - if can?(:update, @prototype)
           %li#edit
             = link_to edit_prototype_path() do
               %i.icon-pencil
               Edit
         %li#link
-          %i.icon-link
+          %span.icon 
+            %i.icon-link
           / %input{:type => "text", :readonly => true, :value => request.original_url}
           = request.original_url
         %li#view-code
           = link_to @code.file.url, :target => '_blank' do
-            %i.icon-code
+            %span.icon 
+              %i.icon-code
             View Code
         %li#like-container
           #like-view-counts
@@ -40,36 +55,40 @@
           #like
             - if @prototype.liked? current_user
               = link_to "/prototype/#{@prototype.id}/unlike", :id => "liked" do
-                %i.icon-heart.liked
+                %span.icon 
+                  %i.icon-heart.liked
                 Liked
             - else
               = link_to "/prototype/#{@prototype.id}/like", :id => "like" do
-                %i.icon-heart-empty
+                %span.icon 
+                  %i.icon-heart-empty
                 Like?
-      #comments
-        - if @comments.exists?
+      - if @comments.exists?
+        %ul#comments.no-bullet
           - @comments.each do |comment|
-            %span
-              = link_to comment.author do
-                %b
-                  = "#{comment.authorname}"
-              says
-              - if user_signed_in?
-                - if comment.author == current_user.id.to_s
-                  %small
-                    (
-                    = link_to "/comments/#{comment.id}", :method => :delete do
-                      delete
-                    )
-            %br
-            = markdown comment.body
-        - else
-          %p No Comments. Be the first to add one!
-        %hr
-        #add_comment
-          - @new_comment = @prototype.comments.build()
-          = simple_form_for(@new_comment, :url => comments_path(@new_comment, :prototype_id => @prototype.id.to_s) ) do |f|
-            .form-inputs
-              = f.input :body, as: :text, label: false, placeholder: 'Leave some feedback'
-            .form-actions
-              = f.button :submit
+            %li
+              #user-avatar
+                = link_to comment.author do
+                  %img{src: image_url("gabe.png"), class: 'round'}
+              #content
+                = link_to comment.author do
+                  %b
+                    = "#{comment.authorname}"
+                says
+                - if user_signed_in?
+                  - if comment.author == current_user.id.to_s                    
+                    %small.delete
+                      = link_to "/comments/#{comment.id}", :method => :delete do
+                        (delete?)
+                = markdown comment.body
+      - else
+        .text-center
+          .fade No comments...yet!
+      %hr
+      #add_comment
+        - @new_comment = @prototype.comments.build()
+        = simple_form_for(@new_comment, :url => comments_path(@new_comment, :prototype_id => @prototype.id.to_s) ) do |f|
+          .form-inputs
+            = f.input :body, as: :text, label: false, placeholder: 'Leave some feedback'
+          .form-actions
+            = f.button :submit

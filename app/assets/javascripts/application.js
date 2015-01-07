@@ -41,7 +41,7 @@ $(function() {
   if ($reload_button) {
     $reload_button.on('click', function(e) {
       e.preventDefault();
-      document.getElementById('framer-window').src += '';
+      document.getElementById('framer-frame').src += '';
     });
   }
 
