@@ -1,7 +1,7 @@
 -# Rails flash messages styled for Zurb Foundation
-.row
-  .large-12.columns
-    - flash.each do |name, msg|
+- flash.each do |name, msg|
+  .row
+    .large-12.columns
       - if msg.is_a?(String)
         %div{:class => "alert-box round #{name.to_s == 'notice' ? 'success' : 'alert'}", "data-alert" => ""}
           = content_tag :div, msg

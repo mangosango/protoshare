@@ -1,84 +1,75 @@
-%p#notice= notice
-
-.row
-  .large-4.columns
-    %h2
-      = @prototype.title
-    %p
-      by
-      = link_to @owner do
-        = @owner.username
-    %h5 Description
-    .panel
-      / %b Device:
-      / = @prototype.device
-      %p
-        = @prototype.description
-    %h5 Likes
-    .panel
-      %b= "#{@prototype.likes} Likes"
-      %span.label.secondary
-        - if @prototype.liked? current_user
-          = link_to "/prototype/#{@prototype.id}/unlike", :id => "liked" do
-            = " "
-        - else
-          = link_to "/prototype/#{@prototype.id}/like", :id => "like" do
-            Like?
-    %h5 Tags
-    .panel
-      %p
-        - @prototype.tags_array.each do |tag|
-          %span.label.info
-            = tag
-        - if user_signed_in?
-          - if @prototype.user_id == current_user.id
-            %span.label.secondary
-              = link_to 'Add Tags', edit_prototype_path(@prototype)
-    %h5 Feedback
-    .panel
-      - if @comments.exists?
-        - @comments.each do |comment|
-          %p
-            %b="#{comment.authorname} says"
-            - if user_signed_in?
-              - if comment.author == current_user.id.to_s
-                %small
-                  (
-                  = link_to "/comments/#{comment.id}", :method => :delete do
-                    delete
-                  )
-            %br
-            = "#{comment.body}"
-      - else
-        %p No Comments. Be the first to add one!
+#prototype-page-wrapper
+  .full-width
+    #framer-window
+      %iframe{:frameborder => "0", :src => "#{@index.file.url}", :id => "framer-frame"} You need a Frames Capable browser to view this content.
+    #meta
+      %span.title-text
+        = @prototype.title
+      %span.by-text
+        by
+        = link_to @owner do
+          = "#{@owner.username}"
       %hr
-      #add_comment
-        - @new_comment = @prototype.comments.build()
-        = simple_form_for(@new_comment, :url => comments_path(@new_comment, :prototype_id => @prototype.id.to_s) ) do |f|
-          .form-inputs
-            = f.input :body, as: :text, label: false, placeholder: 'Leave some feedback'
-          .form-actions
-            = f.button :submit
-    %p
-      = edit_link @prototype
-      %br
-      = destroy_link @prototype
-  .large-8.columns
-    / %dl.tabs{:data => { :tab => true } }
-    /   %dd.active
-    /     = link_to "#panel2" do
-    /       Iframe Preview
-    /   %dd
-    /     = link_to "#panel1" do
-    /       Image Preview
-    .panel
-      = link_to "Fullscreen", @index.file.url, :target => '_blank'
-      |
-      = link_to "View Code", @code.file.url, :target => '_blank'
-      |
-      = link_to "Reload", "reload", :id => 'reload_iframe'
-      .tabs-content
-        #panel2.content.active
-          %iframe{:frameborder => "0", :src => "#{@index.file.url}", :id => "framer-window"} You need a Frames Capable browser to view this content.
-        / #panel1.content
-        /   %img{:src => "#{@prototype.preview.image.url}"}
+      #description
+        .content
+          - if @prototype.description.empty?
+            .text-center
+              %em.fade No Description (.﹒︠₋﹒︡.)
+          - else
+            = markdown @prototype.description
+        .overlay
+      %ul.no-bullet
+        - if can?(:update, @prototype)
+          %li#edit
+            = link_to edit_prototype_path() do
+              %i.icon-pencil
+              Edit
+        %li#link
+          %i.icon-link
+          / %input{:type => "text", :readonly => true, :value => request.original_url}
+          = request.original_url
+        %li#view-code
+          = link_to @code.file.url, :target => '_blank' do
+            %i.icon-code
+            View Code
+        %li#like-container
+          #like-view-counts
+            = @prototype.likes
+            %span.fade
+              Likes
+          #like
+            - if @prototype.liked? current_user
+              = link_to "/prototype/#{@prototype.id}/unlike", :id => "liked" do
+                %i.icon-heart.liked
+                Liked
+            - else
+              = link_to "/prototype/#{@prototype.id}/like", :id => "like" do
+                %i.icon-heart-empty
+                Like?
+      #comments
+        - if @comments.exists?
+          - @comments.each do |comment|
+            %span
+              = link_to comment.author do
+                %b
+                  = "#{comment.authorname}"
+              says
+              - if user_signed_in?
+                - if comment.author == current_user.id.to_s
+                  %small
+                    (
+                    = link_to "/comments/#{comment.id}", :method => :delete do
+                      delete
+                    )
+            %br
+            = markdown comment.body
+        - else
+          %p No Comments. Be the first to add one!
+        %hr
+        #add_comment
+          - @new_comment = @prototype.comments.build()
+          = simple_form_for(@new_comment, :url => comments_path(@new_comment, :prototype_id => @prototype.id.to_s) ) do |f|
+            .form-inputs
+              = f.input :body, as: :text, label: false, placeholder: 'Leave some feedback'
+            .form-actions
+              = f.button :submit

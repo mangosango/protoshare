@@ -5,7 +5,7 @@ class PrototypesController < ApplicationController
   respond_to :html
 
   def index
-    @prototypes = Prototype.all
+    @prototypes = Prototype.order("created_at desc").limit()
     @users = User.all
     respond_with(@prototypes, @users)
   end
@@ -17,7 +17,8 @@ class PrototypesController < ApplicationController
     @comments = @prototype.comments
     # @new_comment = @prototype.comments.build()
     @owner = User.find(@prototype.user_id)
-    respond_with(@prototype, @index, @owner, @comments)
+    
+    render :layout => 'navless'
   end
 
   def new

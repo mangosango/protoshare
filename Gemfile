@@ -20,6 +20,7 @@ gem 'foundation-rails', '5.4.3.1'
 gem 'devise'
 gem 'cancan'
 gem 'mongoid', '~> 4.0.0'
+gem 'kaminari'
 
 # Social
 gem 'mongo_followable'
@@ -41,6 +42,7 @@ gem 'high_voltage'
 gem 'simple_form'
 gem 'nested_form'
 gem 'entypo-rails'
+gem 'redcarpet'
 
 #Server
 gem 'unicorn'

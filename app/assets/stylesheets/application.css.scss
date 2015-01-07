@@ -41,6 +41,10 @@ footer {
   }
 }
 
+span.comment {
+  word-wrap: break-word;  
+}
+
 nav.top-bar {
   // border-bottom: 2px solid $silver;
   ul {
@@ -232,6 +236,116 @@ iframe#notifications {
   max-height: 200px;
 }
 
+.full-width {
+  width: 100%;
+}
+
+.fade {
+  color: $aluminum;
+}
+
+#prototype-page-wrapper {
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+}
+
+#framer-window {
+  width: 100%;
+  height: 100%;
+  padding-right: rem-calc(340);
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+  overflow: hidden;
+}
+
+iframe#framer-frame {
+  width: 100%;
+  height: 100%;
+}
+
+#meta {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: rem-calc(340);
+  height: 100%;
+  background: $white;
+  border-left: 1px solid rgba(0,0,0,0.10);
+  padding: rem-calc(25);
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+  overflow: auto;
+
+  ul {
+    margin-bottom: rem-calc(16);
+    li {
+      font-size: rem-calc(13);
+      border-top: 1px solid $silver;
+      border-bottom: 1px solid $silver;
+      padding: rem-calc(6) 0;
+      a {
+        display: block;
+        color: $jet;
+        &:hover {
+          color: $blue;
+          i {
+            color: $jet;
+          }
+          i.icon-heart.liked {
+            color: $pink;
+          }
+        }
+      }
+    }
+  }
+  span.title-text {
+    font-size: rem-calc(15);
+    font-weight: 300;
+    line-height: rem-calc(15);
+    display: block;
+  }
+  span.by-text {
+    font-size: rem-calc(13);
+  }
+  #description {
+    height: auto;
+    min-height: rem-calc(48);
+    max-height: rem-calc(69);
+    overflow: hidden;
+    p {
+      font-size: rem-calc(15)
+    }
+    &:hover {
+      max-height: none;
+      .overlay {
+        display: none;
+      }
+    }
+    .overlay {
+      position: relative;
+      width: 100%;
+      height: rem-calc(-23);
+      top: rem-calc(-69);
+      background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%); /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
+      background: -ms-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* IE10+ */
+      background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* W3C */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+    }
+  }
+  #comments {
+    font-size: rem-calc(13);
+    p {
+      font-size: rem-calc(13);
+    }
+  }
+}
+
 em.time {
   color: $aluminum;
   -webkit-user-select: none;  /* Chrome all / Safari all */
@@ -242,14 +356,17 @@ em.time {
   }
 }
 
+.link {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+#like-view-counts {
+  float: right;
+}
+
 a:focus, textarea:focus, input:focus{
   outline: 0;
-}
-a#liked:before {
-  content:'Liked'; 
-}
-a#liked:hover:before {
-  content:'Unlike?'; 
 }
 
 .preview-img {
@@ -273,6 +390,9 @@ span.inner {
   padding-top: 100%;
 }
 
+i.icon-heart.liked {
+  color: $pink;
+}
 
 .mtl {
   margin-top: rem-calc(25)
