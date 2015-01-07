@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   get '/users/:id/followers', to: 'users#followers'
 
   get '/notifications', to: 'notifications#index'
-
   get '/p/:id', to: 'prototypes#show'
 
+  # get "/pages/*id" => 'pages#show', as: :page, format: false
 end

@@ -1,0 +1,31 @@
+.row
+  .large-12.column
+    .border-top
+.row
+  .small-6.medium-3.large-2.columns.end
+    %br
+    %b
+      = link_to "PROTOSHARE", "/"
+.row.mtm
+  .small-6.medium-3.large-2.columns
+    %ul.no-bullet
+      %li= link_to "About", page_path('about')
+      %li= link_to "Help", page_path('help')
+      %li= link_to "Legal", page_path('legal')
+  .small-6.medium-3.large-2.columns.end
+    %ul.no-bullet
+      %li.blog
+        = link_to "#" do
+          %span.icon 
+            %i.icon-bookmark
+          Blog
+      %li.twitter
+        = link_to "#" do
+          %span.icon 
+            %i.icon-social-twitter
+          Twitter
+      %li.facebook
+        = link_to "#" do
+          %span.icon 
+            %i.icon-social-facebook
+          Facebook

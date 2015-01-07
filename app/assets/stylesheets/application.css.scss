@@ -21,6 +21,24 @@
 @import "transitions";
 @import "fonts";
 @import "foundation/functions";
+@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,100italic,300italic,400italic,700italic);
+
+footer {
+  margin-top: rem-calc(25);
+  ul li a {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  a {
+    display: block;
+    font-size: rem-calc(13);
+    color: $aluminum;
+    &:hover{
+      color: $jet;
+    }
+  }
+}
 
 nav.top-bar {
   // border-bottom: 2px solid $silver;
@@ -88,6 +106,27 @@ ul.activity {
       color: $blue;
       content: "\E718";
     }
+  }
+}
+
+ul.icon {
+  li {
+    text-indent: -1.4rem;
+    list-style-type: none;
+
+    &:before {
+      font-family: 'entypo';
+      font-size: rem-calc(11);
+      margin-top: rem-calc(2);
+      color: $jet;
+      content: "\2665";
+      float: left;
+      width: 1.4rem;
+    }
+
+    &.blog:before { content: "\1F4D5" }
+    &.twitter:before { content: "\F309" }
+    &.facebook:before { content: "\F30E" }
   }
 }
 
@@ -231,4 +270,13 @@ span.inner {
   display: block;
   height: 0;
   padding-top: 100%;
+}
+
+
+.mtl {
+  margin-top: rem-calc(25)
+}
+
+.mtm {
+  margin-top: rem-calc(15)
 }
