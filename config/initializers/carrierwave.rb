@@ -39,5 +39,5 @@ CarrierWave.configure do |config|
   }
   config.fog_directory  = "storage-protoshare"
   config.fog_public = true
-  config.fog_use_ssl_for_aws = false
+  config.fog_use_ssl_for_aws = true
 end
