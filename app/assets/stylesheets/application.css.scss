@@ -392,14 +392,6 @@ iframe#framer-frame {
     p {
       font-size: rem-calc(15)
     }
-    &:hover {
-      height: auto;
-      min-height: rem-calc(48);
-      max-height: none;
-      .overlay {
-        visibility: hidden;
-      }
-    }
     .overlay {
       position: relative;
       width: 100%;
@@ -522,6 +514,19 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
   padding: rem-calc(8) rem-calc(14);
   -webkit-border-radius: 4px;
   border-radius: 4px;
+  -webkit-transition: box-shadow 0.1s ease-in-out;
+  -moz-transition: box-shadow 0.1s ease-in-out;
+  -ms-transition: box-shadow 0.1s ease-in-out;
+  -o-transition: box-shadow 0.1s ease-in-out;
+  transition: box-shadow 0.1s ease-in-out;
+}
+textarea {
+
+}
+button, .button, input[type="submit"] {
+  border-radius: 4px;
+  padding: 10px 25px;
+  width: 100%;
 }
 
 div.tagsinput { 

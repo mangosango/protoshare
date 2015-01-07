@@ -89,6 +89,8 @@
         - @new_comment = @prototype.comments.build()
         = simple_form_for(@new_comment, :url => comments_path(@new_comment, :prototype_id => @prototype.id.to_s) ) do |f|
           .form-inputs
-            = f.input :body, as: :text, label: false, placeholder: 'Leave some feedback'
+            = f.input :body, as: :text, label: false, placeholder: 'Leave some feedback', input_html: { :rows => 3 }
           .form-actions
             = f.button :submit
+
+%script{src: "_prototype_functions.js"}

@@ -9,3 +9,4 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( entypo.css )
 Rails.application.config.assets.precompile += %w( _jquery.tagsinput.min.js )
 Rails.application.config.assets.precompile += %w( _new_form_tools.js )
+Rails.application.config.assets.precompile += %w( _prototype_functions.js )
