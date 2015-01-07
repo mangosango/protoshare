@@ -23,127 +23,212 @@
 @import "foundation/functions";
 
 nav.top-bar {
-	// border-bottom: 2px solid $silver;
-	ul {
-		li {
-			background: none;
-			h1 {
-				text-transform: uppercase;
-				a:hover {
-					color: $jet;
-				}
-			}
-			a {
-				background: none;
-			}
-		}
-	}
+  // border-bottom: 2px solid $silver;
+  ul {
+    li {
+      background: none;
+      a {
+        background: none;
+      }
+      a#submit {
+        color: $blue;
+        font-weight: 600;
+      }
+    }
+  }
+  .name {
+    h1 {
+      text-transform: uppercase;
+      a {
+        color: $jet;
+      }
+    }
+  }
+}
+.top-bar-section {
+  ul.dropdown {
+    li:not(.has-form):not(.active) {
+      a:not(.button) {
+        text-transform: none !important;
+        &:hover {
+          background: $blue;
+          color: $white;
+        }
+      }
+    }
+  }
 }
 
-ul.dropdown {
-	
+ul.activity {
+  margin: 0 0 0 1rem;
+  li {
+    padding: 0.5rem 1.2rem;
+    border-bottom: 1px solid $silver;
+    text-indent: -1.4rem;
+    list-style-type: none;
+    font-size: rem-calc(13);
+    &:last-child {
+      border-bottom: none;
+    }
+    a {
+      line-height: 1.8;
+    }
+    &:before {
+      font-family: 'entypo';
+      content: "\2665";
+      float: left;
+      width: 1.4rem;
+      margin-top: 2px;
+    }
+    &.liked:before {
+      color: $pink;
+      content: "\2665";
+    }
+    &.comment:before {
+      color: $blue;
+      content: "\E718";
+    }
+  }
+}
+
+.border-top {
+  // margin-top: rem-calc(40);
+  border-top: 1px solid $silver;
 }
 
 #page-wrapper {
-	margin-top: rem-calc(40);
+  margin-top: rem-calc(30);
+}
+
+.top-bar-section {
+  ul.dropdown {
+    top: 50px;
+    background: $white;
+    -webkit-box-shadow: 0 4px 15px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 4px 15px 0 rgba(0,0,0,0.3);
+    padding: 6px 0;
+    -webkit-border-radius: 6px 6px 6px 6px;
+    border-radius: 6px 6px 6px 6px;
+    li:not(.has-form) {
+      a:not(.button) {
+        line-height: 1.8;
+      }
+    }
+    hr {
+      margin: rem-calc(8px);
+    }
+  }
 }
 
 // Prototype grid styles
-#prototypes-grid li .panel {
-	background: white;
-	border-top: none;
-	border-right: 1px solid rgba(0,0,0,0.1);
-	border-left: 1px solid rgba(0,0,0,0.1);
-	border-bottom: 1px solid rgba(0,0,0,0.1);
-	-webkit-border-bottom-right-radius: 5px;
-	-webkit-border-bottom-left-radius: 5px;
-	-moz-border-radius-bottomright: 5px;
-	-moz-border-radius-bottomleft: 5px;
-	border-bottom-right-radius: 5px;
-	border-bottom-left-radius: 5px;
-	line-height: 20px;
-	p {
-		white-space: nowrap;
-		text-overflow: ellipsis;
-		overflow: hidden;
-	}
-	a.title {
-		font-weight: 600;
-		font-style: italic;
-		color: $jet;
-	}
-	a.author {
-		font-size: 90%;
-	}
-	hr {
-		margin: rem-calc(-8) 0 rem-calc(9);
-	}
-	.likes, .comments {
-		font-weight: 600;
-		font-size: 90%;
-		a {
-			color: $jet;
-			display: inline-block;
-			i { color: $aluminum; }
-			i.icon-heart.some { color: $pink; }
-			i.icon-comment.some { color: $blue; }
-		}
-	}
-	.comments {
-		margin-left: rem-calc(15);
-	}
-}
-
-#prototypes-grid li .preview-img {
-	-webkit-border-top-right-radius: 5px;
-	-webkit-border-top-left-radius: 5px;
-	-moz-border-radius-topright: 5px;
-	-moz-border-radius-topleft: 5px;
-	border-top-right-radius: 5px;
-	border-top-left-radius: 5px;
-	-webkit-box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.1);
-	-moz-box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.1);
-	box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.1);
-	&:hover {
-
-	}
+#prototypes-grid li {
+  .contents {
+    -webkit-border-radius: 6px 6px 6px 6px;
+    border-radius: 6px 6px 6px 6px;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+    &:hover {
+      transform: scale(1.02);
+      -webkit-box-shadow: 0 4px 15px 0 rgba(0,0,0,0.1);
+      box-shadow: 0 4px 15px 0 rgba(0,0,0,0.1);
+    }
+    .panel {
+      border-top: none;
+      border-right: 1px solid rgba(0,0,0,0.1);
+      border-left: 1px solid rgba(0,0,0,0.1);
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      background: $white;
+      margin-bottom: 0;
+      line-height: 20px;
+      -webkit-border-radius: 0 0 5px 5px;
+      border-radius: 0 0 5px 5px;
+      p {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      a.title {
+        font-weight: 600;
+        font-style: italic;
+        color: $jet;
+      }
+      a.author {
+        font-size: 90%;
+      }
+      hr {
+        margin: rem-calc(-8) 0 rem-calc(9);
+      }
+      .likes, .comments {
+        font-weight: 600;
+        font-size: 90%;
+        a {
+          color: $jet;
+          display: inline-block;
+          i { color: $aluminum; }
+          i.icon-heart.some { color: $pink; }
+          i.icon-comment.some { color: $blue; }
+        }
+      }
+      .comments {
+        margin-left: rem-calc(15);
+      }
+    }
+  }
 }
 
 iframe {
-	width: 100%;
-	min-height: 100vh;
-	height: 100%;
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
 }
 
 iframe#notifications {
-	width: 250px;
-	height: auto;
-	min-height: 30px;
+  width: 220px;
+  height: 200px;
+  min-height: 200px;
+  max-height: 200px;
+}
+
+em.time {
+  color: $aluminum;
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  &:after {
+    content: 'ago'
+  }
 }
 
 a:focus, textarea:focus, input:focus{
-    outline: 0;
+  outline: 0;
 }
 a#liked:before {
-	content:'Liked'; 
+  content:'Liked'; 
 }
 a#liked:hover:before {
-	content:'Unlike?'; 
+  content:'Unlike?'; 
 }
 
 .preview-img {
-	display: block;
-	width: 100%;
-    font-size: 0;
-    line-height: 0;
-    vertical-align: middle;
-    background-size: cover;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
+  display: block;
+  width: 100%;
+  font-size: 0;
+  line-height: 0;
+  vertical-align: middle;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  -webkit-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+  -webkit-box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.1);
+  box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.1);
 }
 
 span.inner {
-	display: block;
-	height: 0;
-	padding-top: 100%;
+  display: block;
+  height: 0;
+  padding-top: 100%;
 }

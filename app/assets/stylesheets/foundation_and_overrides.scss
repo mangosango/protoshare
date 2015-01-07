@@ -244,7 +244,7 @@ $code-font-family: 'Menlo', Consolas, 'Liberation Mono', Courier, monospace;
 // We use these to style the <hr> element
 // $hr-border-width: 1px;
 // $hr-border-style: solid;
-// $hr-border-color: $gainsboro;
+$hr-border-color: $silver;
 // $hr-margin: rem-calc(20);
 
 // We use these to style lists
@@ -1359,7 +1359,7 @@ $topbar-dropdown-bg: $white;
 $topbar-dropdown-link-color: $jet;
 $topbar-dropdown-link-bg: none;
 // $topbar-dropdown-link-weight: $font-weight-normal;
-// $topbar-dropdown-toggle-size: 5px;
+$topbar-dropdown-toggle-size: 5px;
 $topbar-dropdown-toggle-color: $jet;
 // $topbar-dropdown-toggle-alpha: 0.4;
 
@@ -1368,19 +1368,19 @@ $topbar-link-color: $aluminum;
 $topbar-link-color-hover: $jet;
 $topbar-link-color-active: $primary-color;
 $topbar-link-color-active-hover: $primary-color;
-$topbar-link-weight: $font-weight-bold;
+$topbar-link-weight: $font-weight-normal;
 // $topbar-link-font-size: rem-calc(13);
 // $topbar-link-hover-lightness: -10%; // Darken by 10%
 $topbar-link-bg: none;
-$topbar-link-bg-color-hover: none;
+$topbar-link-bg-color-hover: $white;
 $topbar-link-bg-hover: $topbar-link-bg-color-hover;
 $topbar-link-bg-active: none;
 $topbar-link-bg-active-hover: scale-color($primary-color, $lightness: -14%);
 // $topbar-link-font-family: $body-font-family;
 $topbar-link-text-transform: uppercase;
-// $topbar-link-padding: $topbar-height / 3;
+$topbar-link-padding: $topbar-height / 4;
 // $topbar-back-link-size: $h5-font-size;
-// $topbar-link-dropdown-padding: 20px;
+$topbar-link-dropdown-padding: 10px;
 
 // $topbar-button-font-size: 0.75rem;
 // $topbar-button-top: 7px;
@@ -1395,8 +1395,8 @@ $topbar-link-text-transform: uppercase;
 // $topbar-menu-link-transform: uppercase;
 // $topbar-menu-link-font-size: rem-calc(13);
 // $topbar-menu-link-weight: $font-weight-bold;
-// $topbar-menu-link-color: $white;
-// $topbar-menu-icon-color: $white;
+$topbar-menu-link-color: $jet;
+$topbar-menu-icon-color: $jet;
 // $topbar-menu-link-color-toggled: $jumbo;
 // $topbar-menu-icon-color-toggled: $jumbo;
 

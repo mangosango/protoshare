@@ -1,5 +1,10 @@
-Commented on
-- if activity.trackable == nil
-  Something that was deleted
-- else
-  = link_to activity.trackable.title, activity.trackable, :target => "_top"
+%li.comment
+  = link_to activity.owner.username, (activity.owner if activity.owner), :target => "_top"
+  Commented on
+  - if activity.trackable == nil
+    Something that was deleted
+  - else
+    = link_to activity.trackable.title, activity.trackable, :target => "_top"
+  %br
+  %em.time
+    = time_ago_in_words(activity.created_at)

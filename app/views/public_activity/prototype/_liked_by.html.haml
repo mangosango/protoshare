@@ -1,5 +1,13 @@
-Liked
-- if activity.trackable == nil
-  Something that was deleted
-- else
-  = link_to activity.trackable.title, activity.trackable, :target => "_top"
+%li.liked
+  - if activity.owner == current_user
+    = link_to "You", (activity.owner if activity.owner), :target => "_top"
+  - else
+    = link_to activity.owner.username, (activity.owner if activity.owner), :target => "_top"
+  Liked
+  - if activity.trackable == nil
+    Something that was deleted
+  - else
+    = link_to activity.trackable.title, activity.trackable, :target => "_top"
+  %br
+  %em.time
+    = time_ago_in_words(activity.created_at)

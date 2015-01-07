@@ -5,6 +5,9 @@
     %ul.dropdown
       %li
         %iframe{:src => "/notifications", :id => "notifications", :frameborder => 'none'}
+      %hr
+      %li#all-notifications.text-center
+        = link_to "All Notifications", '/notifications'
 %li#user-profile.has-dropdown
   - if user_signed_in?
     = link_to current_user.username, "#"
@@ -22,4 +25,4 @@
       = link_to new_user_session_path do
         Sign In
 %li#user-profile
-  = link_to 'Submit', new_prototype_path, :class => 'button'
+  = link_to 'Submit', new_prototype_path, :id => 'submit'
