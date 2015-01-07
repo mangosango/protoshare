@@ -24,13 +24,13 @@
             = "#{@owner.username}"
       %hr
       #description
+        .overlay
         .content
           - if @prototype.description.empty?
             .text-center
               %small.fade No description... (◕︿◕✿)
           - else
             = markdown @prototype.description
-        .overlay
       %ul.no-bullet#toolbox
         - if can?(:update, @prototype)
           %li#edit

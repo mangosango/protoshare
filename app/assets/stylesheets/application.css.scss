@@ -156,8 +156,8 @@ ul.icon {
     -webkit-box-shadow: 0 4px 15px 0 rgba(0,0,0,0.3);
     box-shadow: 0 4px 15px 0 rgba(0,0,0,0.3);
     padding: 6px 0;
-    -webkit-border-radius: 6px 6px 6px 6px;
-    border-radius: 6px 6px 6px 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
     li:not(.has-form) {
       a:not(.button) {
         line-height: 1.8;
@@ -316,7 +316,7 @@ iframe#framer-frame {
   width: rem-calc(340);
   height: 100%;
   background: $white;
-  border-left: 1px solid rgba(0,0,0,0.10);
+  box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.15);
   padding: rem-calc(25);
   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
   -moz-box-sizing: border-box;    /* Firefox, other Gecko */
@@ -386,23 +386,25 @@ iframe#framer-frame {
   #description {
     height: auto;
     min-height: rem-calc(48);
-    max-height: rem-calc(69);
+    max-height: rem-calc(68);
     overflow: hidden;
     word-wrap: break-word;
     p {
       font-size: rem-calc(15)
     }
     &:hover {
+      height: auto;
+      min-height: rem-calc(48);
       max-height: none;
       .overlay {
-        display: none;
+        visibility: hidden;
       }
     }
     .overlay {
       position: relative;
       width: 100%;
-      height: rem-calc(-23);
-      top: rem-calc(-69);
+      height: 4.3rem;
+      z-index: 2;
       background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%); /* FF3.6+ */
       background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
       background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
@@ -410,6 +412,9 @@ iframe#framer-frame {
       background: -ms-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* IE10+ */
       background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* W3C */
       filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+    }
+    .content {
+      margin-top: -4.3rem;
     }
   }
   ul#comments {
@@ -511,4 +516,65 @@ i.icon-heart.liked {
 
 .mtm {
   margin-top: rem-calc(15)
+}
+
+input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="week"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], input[type="color"], textarea {
+  padding: rem-calc(8) rem-calc(14);
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+
+div.tagsinput { 
+  border: 1px solid $smoke;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  margin-bottom: 24px;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+  &.focused {
+    border: 1px solid scale-color($smoke, $lightness: -5%);
+    box-shadow: 0px 2px 20px 0px rgba(0,0,0,0.2);
+  }
+  input {
+    font-family: inherit;
+    width: 150px;
+    margin: 0;
+    color: $jet;
+  }
+  span.tag {
+    padding: 0px 4px 0px 8px;
+    margin: 0 2px;
+    border: none;
+    background: $blue;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    color: $white;
+    font-weight: 400;
+    line-height: 28px;
+    a {
+      color: $white;
+      font-size: 14px;
+    }
+    &:first-child {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+select {
+  // -webkit-appearance: none;
+  padding: rem-calc(8) rem-calc(14);
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  background-color: $white;
+  &:focus {
+    background-color: $white;
+    outline: none;
+  }
 }

@@ -23,8 +23,9 @@ class PrototypesController < ApplicationController
 
   def new
     @prototype = Prototype.new
+    @devices = ['iPhone 6', 'iPhone 5s/5c', 'iPad', 'Nexus 5', 'Apple Watch', 'Desktop']
     # @attachments = @prototype.attachments.build
-    respond_with(@prototype)
+    respond_with(@prototype, @devices)
   end
 
   def edit

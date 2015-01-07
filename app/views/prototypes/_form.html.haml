@@ -1,34 +1,18 @@
-/ = simple_form_for(@prototype) do |f|
-/   = f.error_notification
-
-/   .form-inputs
-/     / = f.simple_fields_for :attachments do |fi|
-/     / = fi.input :file, :as => 'file', :input_html => {:multiple => 'multiple'}
-/     / = f.input :code_url
-/     / = f.input :preview_url
-/     / = f.input :short_url
-/     = f.input :attachments, :as => 'file'
-/     = f.input :device
-/     = f.input :description
-
-/   .form-actions
-/     = f.button :submit
-
 = simple_form_for @prototype, :html => {:multipart => true} do |f|
-  .large-6.columns
+  .large-6.large-centered.columns
     .form-inputs
       = f.input :title
-      = f.input :device
-      = f.input :description, as: :text
-      = f.input :tags
-  .large-6.columns
+      = f.input :device, collection: @devices
+      = f.input :description, as: :text, input_html: { :rows => 6 }
+      = f.input :tags, input_html: { :id => "tags" }
+  .large-6.large-centered.columns
     .form-inputs
       / = f.label :preview
       = f.input :preview, as: :file
       = f.label :attachments
       = file_field_tag "attachments[]", type: :file, multiple: true, webkitdirectory: true, directory: true
       = hidden_field_tag "filename[]"
-  .large-12.columns
+  .large-6.large-centered.columns
     .form-actions
       .panel
         .text-right
