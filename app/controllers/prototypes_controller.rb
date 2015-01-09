@@ -5,7 +5,25 @@ class PrototypesController < ApplicationController
   respond_to :html
 
   def index
-    @prototypes = Prototype.order("created_at desc").limit()
+    listing = params[:listing]
+    if listing == 'top'
+      @prototypes = Prototype.order("likes desc").limit(25)
+    elsif listing == 'rising'
+      @prototypes = Prototype.where(:created_at.gte => 1.week.ago).order("likes desc").limit(25)
+    elsif listing == 'newest'
+      @prototypes = Prototype.order("created_at desc").limit(25)
+    else
+      if user_signed_in?
+        if current_user.all_followees.count > 0
+          follower_ids = current_user.followees.only(:f_id).map(&:f_id)
+          @prototypes = Prototype.where(:user_id.in => follower_ids).order("created_at desc").limit(25)
+        else
+          @prototypes = Prototype.order("likes desc").limit(25)
+        end
+      else
+        @prototypes = Prototype.order("likes desc").limit(25)
+      end
+    end
     @users = User.all
     respond_with(@prototypes, @users)
   end
@@ -17,7 +35,6 @@ class PrototypesController < ApplicationController
     @comments = @prototype.comments
     # @new_comment = @prototype.comments.build()
     @owner = User.find(@prototype.user_id)
-    
     render :layout => 'navless'
   end
 

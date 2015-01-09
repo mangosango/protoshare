@@ -1,6 +1,15 @@
 %li#top
-  = link_to 'Top', "#"
+  - if request.path == '/top'
+    = link_to 'Top', "/top", class: "active"
+  - else
+    = link_to 'Top', "/top"
 %li#rising
-  = link_to 'Rising', "#"
+  - if request.path == '/rising'
+    = link_to 'Rising', "/rising", class: "active"
+  - else
+    = link_to 'Rising', "/rising"
 %li#newest
-  = link_to 'Newest', "#"
+  - if request.path == '/newest'
+    = link_to 'Newest', "/newest", class: "active"
+  - else
+    = link_to 'Newest', "/newest"

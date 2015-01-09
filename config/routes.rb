@@ -8,10 +8,13 @@ Rails.application.routes.draw do
   authenticated :user do
     root to: "prototypes#index", :as => "authenticated_root"
   end
-  root to: "prototypes#index"
+  root to: "prototypes#index", defaults: { listing: 'top' }
 
   get '/prototype/:id/like', to: 'prototypes#like'
   get '/prototype/:id/unlike', to: 'prototypes#unlike'
+  get '/top', to: 'prototypes#index', defaults: { listing: 'top' }, :as => :top
+  get '/rising', to: 'prototypes#index', defaults: { listing: 'rising' }, :as => :rising
+  get '/newest', to: 'prototypes#index', defaults: { listing: 'newest' }, :as => :newest
   get '/comment/create/:id', to: 'prototypes#like'
 
   get '/users', to: 'prototypes#index'

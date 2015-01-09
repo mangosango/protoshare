@@ -23,6 +23,21 @@
 @import "foundation/functions";
 @import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,100italic,300italic,400italic,700italic);
 
+h1 {
+  a.inactive {
+    color: $aluminum !important;
+    font-weight: 400 !important;
+    &:hover {
+      color: $jet !important;
+    }
+  }
+}
+
+a.active {
+  color: $jet !important;
+  font-weight: 600 !important;
+}
+
 footer {
   margin-top: rem-calc(25);
   padding-bottom: rem-calc(50);
